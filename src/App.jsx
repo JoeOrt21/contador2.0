@@ -1,72 +1,84 @@
 import {useState} from "react";
+function App (){
 
-function App() {
-  const [cuenta, setCuenta] = useState(10);
+  const [cuenta, setCuenta] = useState(0);
   const [paso, setPaso] = useState(1);
 
-  const handleMinustClick = () => {
+  const handleMinusClick = () => {
     setCuenta(cuenta - paso);
   };
 
   const handleResetClick = () => {
-    setCuenta(cuenta - cuenta);
+    setCuenta(0);
+    setPaso(1);
   };
 
   const handlePlusClick = () => {
-    setCuenta(cuenta + paso)
+    setCuenta(cuenta + paso);
   };
 
-  const handleInputClick = () =>{
+  const handleInputChange = (e) => {
+
+    if (isNaN(e.target.value)){
+      return;
+    }
     setPaso(Number(e.target.value));
   };
 
   return (
+
     <div className="App">
-      <h3>Contador</h3>
+      <h3> Contador </h3>
+      <hr /> 
+      <h2 className="text-center"> {cuenta} </h2>
       <hr />
-      <h2>0</h2>
-      <hr />
-      <div 
-         style={{
-           display: "flex",
-           justifyContent: "flex-end",
-           marginRigth: "5px"
-           }}
-           >
-        <button 
-        type="button" 
-        className="btn btn-primary" 
-        onClick= {handleClick}>
-          +1
-        </button>
 
-        <button 
-        type="button"
-        className="btn btn-primary"
-        onClick={handleResetClick}
-        style={{marginLeft: "5px"}}
-        >
-          RESET
+      <div style= {{ display: "flex", 
+        justifyContent:"flex-end",
+        marginRight: "5px",
+        }}> 
 
-        </button>
-
-        <button 
-        type="button"
-        className="btn btn-primary"
-        onClick={handleMinustClick}
-        style={{marginLeft: "5px"}}
-        >
-          -1
-
-        </button>
-
+        <label>
+          Paso
+          <input 
+          id="paso"
+          type= "text" 
+          onChange = {handleInputChange}
+          value={paso}
+          style= {{marginLeft: "5px", width: "60 px"}}
+          />
+        </label>
         
+        <button 
+          type = "button" 
+          className ="btn btn-primary"
+          onClick={handleMinusClick}
+          style= {{ marginLeft: "5px"}}
+          >
+            -1
+            
+          </button>
 
+        <button 
+          type = "button" 
+          className ="btn btn-primary"
+          onClick={handleResetClick}
+          style= {{marginLeft: "5px"}}
+          >
+            RESET
+            
+          </button>
+
+        <button 
+          type = "button" 
+          className ="btn btn-primary"
+          onClick={handlePlusClick}
+          style= {{marginLeft: "5px"}}
+          >+1</button>
       </div>
-      <button type="button" class="btn btn-secondary">+1</button>
-      
     </div>
-  );
+  
+);
 }
 
 export default App;
